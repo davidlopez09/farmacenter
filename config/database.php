@@ -4,7 +4,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'farmacia');
+define('DB_NAME', 'farmacia_tuing');
 define('DB_CHARSET', 'utf8mb4');
 
 class Database {
@@ -19,7 +19,9 @@ class Database {
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
             try {
+                date_default_timezone_set('America/Bogota');
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
+                self::$instance->exec("SET time_zone = '-05:00'");
             } catch (PDOException $e) {
                 http_response_code(500);
                 echo json_encode(['success' => false, 'message' => 'Error de conexión a la base de datos.']);

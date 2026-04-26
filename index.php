@@ -53,8 +53,8 @@ if (!empty($_SESSION['usuario_id'])) {
       <div id="login-alert"></div>
 
       <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" class="form-control" placeholder="usuario@farmacia.com" autocomplete="username">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" class="form-control" placeholder="Usuario" autocomplete="username">
       </div>
 
       <div class="form-group">
@@ -74,7 +74,7 @@ if (!empty($_SESSION['usuario_id'])) {
 <script src="assets/js/app.js"></script>
 <script>
 (function () {
-  const emailEl = document.getElementById('email');
+  const usuarioEl = document.getElementById('usuario');
   const passEl  = document.getElementById('password');
   const btnEl   = document.getElementById('btn-login');
   const alertEl = document.getElementById('login-alert');
@@ -91,19 +91,19 @@ if (!empty($_SESSION['usuario_id'])) {
 
   async function doLogin() {
     alertEl.innerHTML = '';
-    const email    = emailEl.value.trim();
+    const usuario    = usuarioEl.value.trim();
     const password = passEl.value;
 
-    if (!email || !password) { showAlert('Por favor completa todos los campos.'); return; }
+    if (!usuario || !password) { showAlert('Por favor completa todos los campos.'); return; }
 
     setLoading(true);
-    const res = await API.post('api/login.php', { email, password });
+    const res = await API.post('api/login.php', { usuario, password });
     setLoading(false);
 
     if (res.success) {
       showAlert('¡Acceso correcto! Redirigiendo...', 'success');
       setTimeout(() => { window.location.href = res.data.redirect; }, 600);
-    } else {
+    } else {  
       showAlert(res.message || 'Error al iniciar sesión.');
       passEl.value = '';
       passEl.focus();
@@ -111,7 +111,7 @@ if (!empty($_SESSION['usuario_id'])) {
   }
 
   btnEl.addEventListener('click', doLogin);
-  [emailEl, passEl].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
+  [usuarioEl, passEl].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
 })();
 </script>
 </body>

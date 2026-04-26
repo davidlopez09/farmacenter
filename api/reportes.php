@@ -42,6 +42,7 @@ function calcularRango(string $filtro): array {
         'semanal'   => [date('Y-m-d', strtotime('-7 days')), $hoy],
         'quincenal' => [date('Y-m-d', strtotime('-15 days')), $hoy],
         'mensual'   => [date('Y-m-01'), $hoy],
+        'todo'      => ['2000-01-01', '2100-01-01'],
         default     => [$hoy, $hoy], // diario
     };
 }

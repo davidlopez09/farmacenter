@@ -10,7 +10,7 @@ const API = {
                 ...options,
             });
             const data = await res.json();
-            return data;
+            return data
         } catch (e) {
             console.error('API Error:', e);
             return { success: false, message: 'Error de conexión con el servidor.' };

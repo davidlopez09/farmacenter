@@ -12,29 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $body  = json_decode(file_get_contents('php://input'), true);
-$email = trim($body['email'] ?? '');
+$usuario = trim($body['usuario'] ?? '');
 $pass  = trim($body['password'] ?? '');
 
-if (empty($email) || empty($pass)) {
-    jsonError('Email y contraseña son requeridos.');
-}
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    jsonError('Email inválido.');
+if (empty($usuario) || empty($pass)) {
+    jsonError('Usuario y contraseña son requeridos.');
 }
 
 $db  = Database::connect();
 $sql = "SELECT u.id, u.nombre, u.password, u.estado, r.nombre AS rol
         FROM usuarios u
         JOIN roles r ON r.id = u.rol_id
-        WHERE u.email = ?
+        WHERE u.usuario = ?
         LIMIT 1";
 
 $stmt = $db->prepare($sql);
-$stmt->execute([$email]);
+$stmt->execute([$usuario]);
 $user = $stmt->fetch();
 
-if (!$user || !password_verify($pass, $user['password'])) {
+// if (!$user || !password_verify($pass, $user['password'])) {
+if (!$user || $pass !== $user['password']) {
     jsonError('Credenciales incorrectas.', 401);
 }
 

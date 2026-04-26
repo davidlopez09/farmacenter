@@ -37,7 +37,7 @@ function listarVentas(PDO $db): void {
     $sql = "SELECT v.id, v.total, v.metodo_pago, v.fecha, u.nombre AS cajero
             FROM ventas v
             JOIN usuarios u ON u.id = v.usuario_id
-            WHERE DATE(v.fecha) BETWEEN ? AND ?
+           WHERE DATE(v.fecha) BETWEEN ? AND ?
             ORDER BY v.fecha DESC
             LIMIT ? OFFSET ?";
 
