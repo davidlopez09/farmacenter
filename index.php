@@ -29,19 +29,9 @@ if (!empty($_SESSION['usuario_id'])) {
 
   <!-- Branding side -->
   <div class="login-brand">
-    <div class="login-brand-circles">
-      <div class="circle c1"></div>
-      <div class="circle c2"></div>
-      <div class="circle c3"></div>
-    </div>
     <div class="login-brand-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 3H5C3.89 3 3 3.89 3 5v14c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm-7 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 10H8v-1c0-2 4-3.1 6-3.1 2 0 6 1.1 6 3.1v1H8z"/>
-        <path d="M11 10h2v2h2v2h-2v2h-2v-2H9v-2h2z"/>
-      </svg>
+     <img src="assets/img/logo.png" alt="logo">
     </div>
-    <h1>FarmaSys</h1>
-    <p>Sistema de gestión farmacéutica</p>
   </div>
 
   <!-- Form side -->

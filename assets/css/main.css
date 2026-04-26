@@ -87,37 +87,11 @@ img {
     align-items: center;
     justify-content: center;
     padding: 3rem;
-    background: linear-gradient(135deg, #0d1b2a 0%, #2aa5a8 120%);
+    background: white;
     position: relative;
     overflow: hidden;
 }
 
-.login-brand::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 60% 40%, rgba(0, 184, 148, .3) 0%, transparent 70%);
-}
-
-.login-brand-icon {
-    width: 90px;
-    height: 90px;
-    background: rgba(255, 255, 255, .1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    border: 2px solid rgba(255, 255, 255, .2);
-    position: relative;
-    z-index: 1;
-}
-
-.login-brand-icon svg {
-    width: 48px;
-    height: 48px;
-    fill: #fff;
-}
 
 .login-brand h1 {
     font-size: 2rem;

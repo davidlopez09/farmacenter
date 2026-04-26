@@ -78,6 +78,9 @@ function navigateTo(view) {
     document.querySelectorAll('.view-section').forEach(s => {
         s.style.display = s.id === `view-${view}` ? '' : 'none';
     });
+    
+    localStorage.setItem('activeView', view);
+    
     if (window.viewHandlers && window.viewHandlers[view]) {
         window.viewHandlers[view]();
     }

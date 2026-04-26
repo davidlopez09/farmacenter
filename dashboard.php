@@ -313,8 +313,13 @@ $initial = strtoupper(mb_substr($user['nombre'], 0, 1));
 
     };
 
-    // Navigate to inicio on load
-    loadDashboard();
+    // Navigate to saved view on load, or default to 'inicio'
+    const savedView = localStorage.getItem('activeView') || 'inicio';
+    if (window.viewHandlers[savedView]) {
+      navigateTo(savedView);
+    } else {
+      navigateTo('inicio');
+    }
   </script>
 </body>
 
