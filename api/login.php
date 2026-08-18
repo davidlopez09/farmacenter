@@ -31,7 +31,19 @@ $stmt->execute([$usuario]);
 $user = $stmt->fetch();
 
 // if (!$user || !password_verify($pass, $user['password'])) {
-if (!$user || $pass !== $user['password']) {
+if (!$user) {
+    jsonError('Credenciales incorrectas.', 401);
+}
+
+$passOk = password_verify($pass, $user['password']);
+$storedIsHash = str_starts_with($user['password'] ?? '', '$2');
+if (!$passOk && !$storedIsHash && $pass === $user['password']) {
+    // Contraseña en texto plano (usuario antiguo): validar y migrar a hash
+    $passOk = true;
+    $upd = $db->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
+    $upd->execute([password_hash($pass, PASSWORD_DEFAULT), $user['id']]);
+}
+if (!$passOk) {
     jsonError('Credenciales incorrectas.', 401);
 }
 

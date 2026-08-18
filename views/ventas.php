@@ -29,7 +29,6 @@
         <div style="display:flex;gap:.5rem;align-items:center">
           <input type="date" id="hist-desde" class="form-control" style="max-width:140px" value="<?= date('Y-m-d') ?>">
           <input type="date" id="hist-hasta" class="form-control" style="max-width:140px" value="<?= date('Y-m-d') ?>">
-          <button class="btn btn-ghost btn-sm" id="btn-buscar-historial">Buscar</button>
         </div>
       </div>
       <div class="table-wrap" id="tabla-historial-ventas">

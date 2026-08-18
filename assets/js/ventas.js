@@ -172,6 +172,7 @@ const Ventas = (() => {
         if (res.success) {
             Toast.success(`Venta #${res.data.venta_id} registrada — ${Fmt.money(res.data.total)}`);
             clearCart();
+            loadHistorial();
             mostrarTicket(res.data.venta_id);
         } else {
             Toast.error(res.message || 'Error al registrar la venta.');
@@ -262,7 +263,9 @@ const Ventas = (() => {
         });
 
         // Historial
-        document.getElementById('btn-buscar-historial')?.addEventListener('click', () => { historialPagina = 1; loadHistorial(); });
+        ['hist-desde', 'hist-hasta'].forEach(id => {
+            document.getElementById(id)?.addEventListener('change', () => { historialPagina = 1; loadHistorial(); });
+        });
         loadHistorial();
 
         // Cerrar modales

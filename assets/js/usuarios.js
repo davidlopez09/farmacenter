@@ -7,19 +7,20 @@ const Usuarios = (() => {
     async function load() {
         const tbody = document.getElementById('tbody-usuarios');
         if (!tbody) return;
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted" style="padding:2rem">Cargando...</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding:2rem">Cargando...</td></tr>';
 
         const res = await API.get('api/usuarios.php');
         if (!res.success) { Toast.error(res.message); return; }
 
         if (!res.data.length) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted" style="padding:2rem">No hay usuarios registrados.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding:2rem">No hay usuarios registrados.</td></tr>';
             return;
         }
 
         tbody.innerHTML = res.data.map(u => `
       <tr>
         <td>${u.id}</td>
+        <td>${u.usuario}</td>
         <td>
           <div style="display:flex;align-items:center;gap:.6rem">
             <div class="sidebar-avatar" style="width:30px;height:30px;font-size:.75rem;flex-shrink:0">${u.nombre.charAt(0).toUpperCase()}</div>
@@ -47,6 +48,7 @@ const Usuarios = (() => {
     function edit(u) {
         editingId = u.id;
         document.getElementById('modal-usr-title').textContent = 'Editar Usuario';
+        document.getElementById('usr-usuario').value = u.usuario || '';
         document.getElementById('usr-nombre').value = u.nombre;
         document.getElementById('usr-email').value = u.email;
         document.getElementById('usr-password').value = '';
@@ -58,19 +60,20 @@ const Usuarios = (() => {
     }
 
     async function save() {
+        const usuario = document.getElementById('usr-usuario')?.value?.trim();
         const nombre = document.getElementById('usr-nombre')?.value?.trim();
         const email = document.getElementById('usr-email')?.value?.trim();
         const password = document.getElementById('usr-password')?.value;
         const rol_id = parseInt(document.getElementById('usr-rol')?.value);
         const estado = parseInt(document.getElementById('usr-estado')?.value ?? 1);
 
-        if (!nombre || !email) { Toast.error('Nombre y email son requeridos.'); return; }
+        if (!usuario || !nombre || !email) { Toast.error('Usuario, nombre y email son requeridos.'); return; }
         if (!editingId && !password) { Toast.error('La contraseña es requerida para nuevos usuarios.'); return; }
 
         const btn = document.getElementById('btn-guardar-usr');
         btn.disabled = true;
 
-        const data = { nombre, email, rol_id, estado };
+        const data = { usuario, nombre, email, rol_id, estado };
         if (password) data.password = password;
 
         let res;

@@ -8,10 +8,10 @@
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>#</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
+        <tr><th>#</th><th>Usuario</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
       </thead>
       <tbody id="tbody-usuarios">
-        <tr><td colspan="6" class="text-center text-muted" style="padding:2rem">Cargando...</td></tr>
+        <tr><td colspan="7" class="text-center text-muted" style="padding:2rem">Cargando...</td></tr>
       </tbody>
     </table>
   </div>
@@ -26,6 +26,10 @@
     </div>
     <div class="modal-body">
       <form id="form-usuario" onsubmit="return false">
+        <div class="form-group">
+          <label for="usr-usuario">Usuario de acceso *</label>
+          <input type="text" id="usr-usuario" class="form-control" placeholder="Nombre de usuario para iniciar sesión" maxlength="20">
+        </div>
         <div class="form-group">
           <label for="usr-nombre">Nombre completo *</label>
           <input type="text" id="usr-nombre" class="form-control" placeholder="Nombre del usuario">
